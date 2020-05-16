@@ -1,29 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <button @click="increment1">
+    counts[0] is: {{ state.counts[0] }}
+  </button>
+  <button @click="increment2">
+    counts[1] is: {{ state.counts[1] }}
+  </button>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script>
+import { reactive } from 'vue'
 
-export default Vue.extend({
-  name: 'App',
-  components: {
-    HelloWorld
+export default {
+  setup() {
+    const state = reactive({
+      counts: [100, 200],
+    })
+
+    function increment1() {
+      state.counts[0]++
+    }
+
+    function increment2() {
+      state.counts[1]++
+    }
+
+    return {
+      state,
+      increment1,
+      increment2,
+    }
   }
-});
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
-</style>
+</script>
